@@ -1,5 +1,4 @@
-# 执行 CloudflareWarpSpeedTest 并输出到 result.csv
-
+# warp优选ip
 
 function Get-CurrentWarpEndpoint {
     # 执行warp-cli settings命令并捕获输出
@@ -23,13 +22,13 @@ function Get-CurrentWarpEndpoint {
 Write-Output "运行前,确保你的所有代理都关闭了!"
 Read-Host "按 Enter 键继续"
 
-CloudflareWarpSpeedTest -f ipv4.txt -o result.csv
+CloudflareWarpSpeedTest -f "$PSScriptRoot\ipv4.txt" -o "$PSScriptRoot\result.csv"
 
 # 等待命令执行完毕，确保结果已写入文件
 Start-Sleep -Seconds 2
 
 # 读取并解析 result.csv 文件
-$resultData = Get-Content -Path result.csv
+$resultData = Get-Content -Path "$PSScriptRoot\result.csv"
 
 # 获取第二行记录（跳过标题行）
 $secondLine = $resultData[1]
