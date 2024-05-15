@@ -1,5 +1,10 @@
 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Write-Output "运行前,确保你的所有代理都关闭了!"
+Read-Host "按 Enter 键继续"
+
+
 # 设置下载链接和本地文件路径
 $url = "https://zip.baipiao.eu.org"
 $zipFilePath = "$PSScriptRoot\txt.zip"
@@ -41,10 +46,10 @@ foreach($type in $types)
         $ipTxt = "$PSScriptRoot\txt\$type-1-$port.txt"
         $csvFile = "$PSScriptRoot\result-$type-$port.csv"
 
-        # `echo ""` 会发送一个空的字符串作为输入（类似用户只是按了 Enter）
+        #`echo ""` 会发送一个空的字符串作为输入（类似用户只是按了 Enter）
         echo "" | CloudflareST.exe -n 1000 -tp $port -dn 10  -p 10  -f $ipTxt  -o $csvFile -url $cloudflareSTUrl
         
-        # 等待命令执行完毕，确保结果已写入文件
+        等待命令执行完毕，确保结果已写入文件
         Start-Sleep -Seconds 2
         
         # 读取并解析对应端口号的 result.csv 文件
@@ -56,17 +61,21 @@ foreach($type in $types)
             $columns = $_ -split ','
 
             # 检查条件丢包率大于75% 或者 延迟大于1000 或者 下载速度小于 1，跳过这行
-            if ($columns[3] -ge 0.75 -or $columns[4] -ge 1000 -or $columns[5] -le 1) {
+            if ([float]$columns[3] -ge 0.75 -or [float]$columns[4] -ge 1000 -or [float]$columns[5] -le 1) {
                 continue
             }
 
             # 获取IP地址，位于第一列
             $ip = $columns[0].Trim()
+
+       
             # 添加格式化的IP到列表
             $ipList += $ip+":"+$port
         }
     }
 }
+
+
 
 
 # 最后将所有记录的IP:PORT组合输出到一个文本文件

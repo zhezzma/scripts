@@ -29,10 +29,9 @@ foreach ($port in $ports) {
         $columns = $_ -split ','
 
         # 检查条件丢包率大于75% 或者 延迟大于1000 或者 下载速度小于 1，跳过这行
-        if ($columns[3] -ge 0.75 -or $columns[4] -ge 1000 -or $columns[5] -le 1) {
+        if ([float]$columns[3] -ge 0.75 -or [float]$columns[4] -ge 1000 -or [float]$columns[5] -le 1) {
             continue
         }
-
         # 获取IP地址，位于第一列
         $ip = $columns[0].Trim()
         # 添加格式化的IP到列表
