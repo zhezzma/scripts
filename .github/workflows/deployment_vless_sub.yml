@@ -17,7 +17,7 @@ jobs:
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: |-
           curl --request POST \
-          --url https://api.cloudflare.com/client/v4/accounts/9ba4c11ce3a9235a34b3481795485dec/workers/scripts/vless2sub/deployments \
+          --url https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/vless2sub/deployments \
           --header 'Authorization: Bearer RCIivLm7fLQs_ocqY420TpyAiaovRuTDioIfXN6X' \
           --header 'Content-Type: application/json' \
           --data '{
