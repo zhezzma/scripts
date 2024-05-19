@@ -40,7 +40,7 @@ foreach ($port in $ports) {
 }
 
 # 最后将所有记录的IP:PORT组合输出到一个文本文件
-$outputPath = "$PSScriptRoot\addressesapi.txt"
+$outputPath = "$PSScriptRoot\addressesapi_cf.txt"
 $ipList | Out-File -FilePath $outputPath -Encoding UTF8
 
 # 输出保存路径供参考

@@ -12,6 +12,7 @@ $destinationFolder = "$PSScriptRoot\txt"
 
 # 下载zip文件
 Invoke-WebRequest -Uri $url -OutFile $zipFilePath
+Write-Output "下载zip文件成功!"
 # 创建解压目录，如果不存在的话
 If (!(Test-Path -Path $destinationFolder)) {
     New-Item -ItemType Directory -Force -Path $destinationFolder
@@ -22,7 +23,7 @@ Expand-Archive -LiteralPath $zipFilePath -DestinationPath $destinationFolder -Fo
 
 # 删除下载的zip文件
 Remove-Item -Path $zipFilePath
-
+Write-Output "解压完毕,开始测试:"
 
 
 $types = @(31898,45102)
@@ -47,9 +48,8 @@ foreach($type in $types)
         $csvFile = "$PSScriptRoot\result-$type-$port.csv"
 
         #`echo ""` 会发送一个空的字符串作为输入（类似用户只是按了 Enter）
-        echo "" | CloudflareST.exe -n 1000 -tp $port -dn 10  -p 10  -f $ipTxt  -o $csvFile -url $cloudflareSTUrl
+        echo " " | CloudflareST.exe -n 1000 -tp $port -dn 10  -p 10  -f $ipTxt  -o $csvFile -url $cloudflareSTUrl
         
-        等待命令执行完毕，确保结果已写入文件
         Start-Sleep -Seconds 2
         
         # 读取并解析对应端口号的 result.csv 文件
@@ -79,7 +79,7 @@ foreach($type in $types)
 
 
 # 最后将所有记录的IP:PORT组合输出到一个文本文件
-$outputPath = "$PSScriptRoot\addressesapi2.txt"
+$outputPath = "$PSScriptRoot\addressesapi_proxy.txt"
 $ipList | Out-File -FilePath $outputPath -Encoding UTF8
 
 # 输出保存路径供参考
