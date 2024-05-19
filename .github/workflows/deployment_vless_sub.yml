@@ -3,7 +3,7 @@
 name: Deployment Vless Sub
 on:
   push:
-    branches: [main]
+    branches: [master]
 
   workflow_dispatch:
 
@@ -22,7 +22,7 @@ jobs:
         run: |-
           curl --request POST \
           --url https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/vless2sub/deployments \
-          --header 'Authorization: Bearer $CF_TOKEN' \
+          --header 'Authorization: Bearer ${CF_TOKEN}' \
           --header 'Content-Type: application/json' \
           --data '{
             "annotations": {
