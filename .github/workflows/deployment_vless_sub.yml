@@ -18,7 +18,7 @@ jobs:
         run: |-
           curl --request POST \
           --url https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/vless2sub/deployments \
-          --header 'Authorization: Bearer RCIivLm7fLQs_ocqY420TpyAiaovRuTDioIfXN6X' \
+          --header "Authorization: Bearer ${CF_TOKEN}" \
           --header 'Content-Type: application/json' \
           --data '{
             "annotations": {
