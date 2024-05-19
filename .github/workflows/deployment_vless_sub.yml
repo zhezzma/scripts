@@ -22,16 +22,16 @@ jobs:
           --header "Authorization: Bearer ${CF_TOKEN}" \
           --header "Content-Type: application/json" \
           --data '{
-            "metadata": {
-              "body_part": "workers_script",
-              "bindings": []
+            "annotations": {
+              "workers/message": "Deploy update ip."
             },
-            "deployment": {
-              "routes": [
-                "http://*myworkers.dev/*"
-              ]
-            },
-            "migrations": []
+            "strategy": "percentage",
+            "versions": [
+              {
+                "percentage": 100,
+                "version_id": "533bb14e-a58a-4b6a-9588-e65c63176ea3"
+              }
+            ]
           }')
           if [ $? -ne 0 ]; then
             echo "Error deploying to Cloudflare"
