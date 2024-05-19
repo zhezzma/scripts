@@ -11,17 +11,13 @@ jobs:
   sync-to-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          lfs: true
       - name: Deploy to cloudflare
         env:
           CF_TOKEN: ${{ secrets.CF_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: |-
           curl --request POST \
-          --url https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/workers/scripts/vless2sub/deployments \
+          --url https://api.cloudflare.com/client/v4/accounts/9ba4c11ce3a9235a34b3481795485dec/workers/scripts/vless2sub/deployments \
           --header 'Authorization: Bearer ${CF_TOKEN}' \
           --header 'Content-Type: application/json' \
           --data '{
