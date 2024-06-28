@@ -28,7 +28,7 @@ jobs:
             "versions": [
               {
                 "percentage": 100,
-                "version_id": "0c5f6c00-089e-45ef-a416-bb574d4f7b3c"
+                "version_id": "30a2a606-c9b4-4520-b1e2-017204b42efc"
               }
             ]
           }'

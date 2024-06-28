@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "main": "node index.js",
     "test": "vitest"
@@ -11,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "ofetch": "^1.3.4"
   }
 }
