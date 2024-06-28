@@ -1,3 +1,4 @@
 *.csv
 cloudflarest/txt
 wgcf-profile.conf
+node_modules/
